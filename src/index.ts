@@ -17,6 +17,7 @@ import qs from "qs";
 import {errorHandlerMiddleWare} from "./core/middleware/errorMiddleware";
 import userRoutes from "./user/routes/user-routes";
 import authRoutes from "./auth/routes/auth-route";
+import {authMiddleware} from "./core/middleware/auth-middleware";
 
 config()
 
@@ -29,6 +30,7 @@ app.use((req,res,next) =>{
     next();
 });
 
+app.use(authMiddleware());
 app.use('/api/users' , userRoutes);
 
 app.use('/api/auth' , authRoutes);

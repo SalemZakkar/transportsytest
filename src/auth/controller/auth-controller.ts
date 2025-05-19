@@ -34,5 +34,7 @@ export const createAccount = handler(async (req, res, next) => {
     });
     let result = await model.save();
     result.password = undefined as any;
-    sendSuccess(res, {data: result});
+    let token = await tokenSign(result.id, result.role);
+
+    sendSuccess(res, {data: result , token: token});
 });

@@ -29,7 +29,6 @@ let UserSchema = new mongo.Schema(
             virtuals: true,
             transform: (doc, ret) => {
                 delete ret.password;
-                ret.phone = extractPhone(ret.phone)
             }
         }
     }

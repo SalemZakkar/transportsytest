@@ -1,7 +1,6 @@
 import app from "./index";
 import {connect} from "./db";
 import {initializeApp} from "firebase/app";
-import * as functions from "firebase-functions";
 connect().then(() => {
     console.log("Mongo Connected")
 });
@@ -18,8 +17,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig)
 
 
-// app.listen(process.env.PORT, () => {
-//     console.log("Server started")
-// })
+app.listen(process.env.PORT, () => {
+    console.log("Server started")
+})
 
-export const api = functions.https.onRequest(app);

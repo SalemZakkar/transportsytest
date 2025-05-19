@@ -9,6 +9,8 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      JWT_SECRET: abcc-dsfg-acvr-eewr6y788  #
     steps:
       - uses: actions/checkout@v4
       - run: npm ci

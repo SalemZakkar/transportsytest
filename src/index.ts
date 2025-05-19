@@ -1,16 +1,4 @@
 import express from "express";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-const firebaseConfig = {
-    apiKey: "AIzaSyAyaavMUKnjS6N9Kr3qW2NYGyBIEjXEXEs",
-    authDomain: "transortsytest.firebaseapp.com",
-    projectId: "transortsytest",
-    storageBucket: "transortsytest.firebasestorage.app",
-    messagingSenderId: "671799075941",
-    appId: "1:671799075941:web:d7b7c9fe4f92f281bfd28c",
-    measurementId: "G-H01XBC79KG"
-};
-initializeApp(firebaseConfig)
 let app = express();
 import {config} from "dotenv";
 import qs from "qs";

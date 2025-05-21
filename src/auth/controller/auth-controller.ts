@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import {sendSuccess} from "../../core/utils/utils/sendResponse";
 import {UserModel} from "../../user/model/user_model";
 import {compare, hash} from "bcrypt";
-import {RoleEnum} from "../../core/models/role-enum";
+import {RoleEnum} from "../../core/abilities/role-enum";
 import {ErrorInput} from "../../core/models/app-error";
 
 async function tokenSign(id: string, role: string): Promise<string> {

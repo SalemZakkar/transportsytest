@@ -1,6 +1,6 @@
 import {mongo} from "../../db";
 import {extractPhone} from "../../core/utils/utils/string/string-utils";
-import {RoleEnum} from "../../core/models/role-enum";
+import {RoleEnum} from "../../core/abilities/role-enum";
 let UserSchema = new mongo.Schema(
     {
         name: {

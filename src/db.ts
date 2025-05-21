@@ -32,3 +32,5 @@ export const connect = async () => {
         dbName: process.env.DBNAME
     });
 }
+
+export const dbUrl = process.env

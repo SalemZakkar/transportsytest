@@ -6,6 +6,7 @@ import {errorHandlerMiddleWare} from "./core/middleware/errorMiddleware";
 import userRoutes from "./user/routes/user-routes";
 import authRoutes from "./auth/routes/auth-route";
 import {authMiddleware} from "./core/middleware/auth-middleware";
+import lineRoutes from "./lines/routes/line-routes";
 
 config()
 
@@ -22,6 +23,8 @@ app.use(authMiddleware());
 app.use('/api/users' , userRoutes);
 
 app.use('/api/auth' , authRoutes);
+
+app.use('/api/lines' , lineRoutes);
 
 app.use(errorHandlerMiddleWare)
 

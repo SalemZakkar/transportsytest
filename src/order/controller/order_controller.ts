@@ -7,19 +7,23 @@ import {OrderModel} from "../model/order_model";
 import {LinkModel} from "../../link/model/link_model";
 import {getUserFromReq} from "../../core/middleware/auth-middleware";
 import {UserModel} from "../../user/model/user_model";
+import {BaseApiGet} from "../../core/models/base-api-get";
 
 export const createOrder = handler(async (req, res, next) => {
     const session = await mongo.startSession();
 
     try {
-        const authUser = await getUserFromReq(req); // from auth/session
+        session.startTransaction();
+        const authUser = await getUserFromReq(req);
         const link = await LinkModel.findOne({user: authUser.id});
 
         if (!link?.line) {
             throw new ErrorInput('No linked line');
         }
 
-        session.startTransaction();
+
+
+
 
         const [user, line] = await Promise.all([
             UserModel.findById(req.body.userId).session(session),
@@ -50,7 +54,7 @@ export const createOrder = handler(async (req, res, next) => {
                     price: line.price
                 }
             ],
-            { session }
+            {session}
         );
 
 
@@ -60,10 +64,23 @@ export const createOrder = handler(async (req, res, next) => {
         await session.abortTransaction();
         next(e);
     } finally {
-        await session.endSession(); // ✅ Always close session
+        await session.endSession();
     }
 });
 
 
 export const getOrder = handler(async (req, res, next) => {
+    let user = await getUserFromReq(req);
+    let model = new BaseApiGet(OrderModel.find({user: user.id}), req).paginate();
+    let count = await (new BaseApiGet(OrderModel.find({user: user.id}), req)).query.countDocuments();
+    let data = await model.query.clone().find();
+    sendSuccess(res, {data: data, total: count});
+
+});
+
+export const getAllOrders = handler(async (req, res, next) => {
+    let model = new BaseApiGet(OrderModel.find(), req).paginate();
+    let count = await (new BaseApiGet(OrderModel.find(), req)).query.countDocuments();
+    let data = await model.query.clone().find();
+    sendSuccess(res, {data: data, total: count});
 });

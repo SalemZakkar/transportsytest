@@ -22,6 +22,10 @@ let UserSchema = new mongo.Schema(
             enum: Object.values(RoleEnum),
             required: true,
         },
+        balance: {
+            type: Number,
+            default: 0,
+        }
 
     },
     {
